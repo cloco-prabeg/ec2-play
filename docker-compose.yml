@@ -3,7 +3,8 @@ networks:
     driver: bridge
 
 volumes:
-  ec2-play_node_modules: {}
+  ec2-play_node_modules:
+  ec2-play_lib:
 
 services:  
   api:
@@ -12,13 +13,13 @@ services:
       dockerfile: Dockerfile
     image: api_image
     container_name: ec2-play_api
-    user: 1000:1000
     working_dir: /home/ec2-play
     ports:
       - 8848:8848
     volumes:
       - .:/home/ec2-play
-      - ec2-play_node_modules:/home/node_modules
+      - ec2-play_node_modules:/home/ec2-play/node_modules
+      - ec2-play_lib:/home/ec2-play/lib
     networks:
       - ec2-play
   
