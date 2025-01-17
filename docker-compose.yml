@@ -1,0 +1,35 @@
+networks:
+  ec2-play:
+    driver: bridge
+
+volumes:
+  ec2-play_node_modules: {}
+
+services:  
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api_image
+    container_name: ec2-play_api
+    user: 1000:1000
+    working_dir: /home/ec2-play
+    ports:
+      - 8848:8848
+    volumes:
+      - .:/home/ec2-play
+      - ec2-play_node_modules:/home/node_modules
+    networks:
+      - ec2-play
+  
+  webserver:
+    image: nginx:alpine
+    container_name: ec2-play_webserver
+    depends_on:
+      - api
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    networks:
+      - ec2-play

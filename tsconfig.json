@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "moduleDetection": "force",
+
+    "strict": true,
+    "strictNullChecks": false,
+
+    "module": "commonjs",
+    "outDir": "lib",
+
+    "lib": ["es6","dom"],
+  },
+  "include": ["src/**/*.ts"], 
+}
